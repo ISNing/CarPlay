@@ -5,7 +5,7 @@
 #include "timer.h"
 
 #define MOTOR_PWM_FREQ 5000
-#define MAX_MOTOR_PWM MOTOR_PWM_FREQ
+#define MAX_MOTOR_PWM 255
 
 void set_pwm_motor1(int val);
 void set_pwm_motor2(int val);
