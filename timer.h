@@ -7,11 +7,10 @@ TIMER_INIT = 65536 - TIME_PER_INTERRUPT_NS*FOSC/1e9
 And TIMER_INIT < 65536 as well as TIME_PER_INTERRUPT_NS > 83.33(84)
 */
 #define FOSC 12e6L
-#define TIME_PER_INTERRUPT_NS 1e2 // > 83.33(84)
+#define TIME_PER_INTERRUPT_NS 1e3 // > 83.33(84)
 #define TIMER_INIT (int)(65536 - TIME_PER_INTERRUPT_NS * FOSC/1e9)
 
 void check_reset();
-void delay_hns(unsigned short hns);
 void delay_us(unsigned short us);
 void delay_ms(unsigned long ms);
 void timer_reset();
