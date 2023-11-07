@@ -1,0 +1,10 @@
+CarPlay
+*.hex
+*.build_log.htm
+*.lnp
+*.M51
+*.uvgui.*
+*.LST
+*.OBJ
+*.log
+*.lock
