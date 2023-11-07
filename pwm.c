@@ -14,6 +14,10 @@ void set_pwm_motor1(int val) { pwm_motor1 = val; }
 
 void set_pwm_motor2(int val) { pwm_motor2 = val; }
 
+int get_pwm_motor1() { return pwm_motor1; }
+
+int get_pwm_motor2() { return pwm_motor2; }
+
 void PwmMotor1Refresh(void) {
     pwm_count_motor1++;
     if (pwm_motor1 < 0) {
