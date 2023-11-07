@@ -75,7 +75,7 @@ void PwmRefreshBlocked(bit (*stop_check_ptr)()) {
     while (1) {
         PwmMotor1Refresh();
         PwmMotor2Refresh();
-        delay_us(1000000 / MOTOR_PWM_FREQ / MAX_MOTOR_PWM);
+        delay_hns(1e7 / MOTOR_PWM_FREQ / MAX_MOTOR_PWM);
         if (stop_check_ptr())
             break;
     }
