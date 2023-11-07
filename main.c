@@ -3,8 +3,9 @@
 #include "timer.h"
 
 bit stop_check() {
-    if (P3_7 != 0) // K4 pressed
-        return 0;
+    if (P3_7 == 0) // K4 pressed
+        return 1;
+    else return 0;
 }
 
 int main(void) {
