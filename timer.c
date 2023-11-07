@@ -1,37 +1,58 @@
 #include "timer.h"
 
-unsigned char time_lock = 0;
-unsigned long time_us = 0;
-
-void check_reset() {
-    if (time_lock == 0) {
-        time_us = 0; // reset to 0
-    }
-}
-
-void delay_us(unsigned short us) {
-    long init = time_us;
-    check_reset();
-    time_lock++;
-    while ((time_us - init) < us)
+void delay_5us() {
+    static unsigned char i;
+#define X (5 * 12 - 3) / 5
+    for (i = X; i > X; i--)
         ;
-    time_lock--;
-    check_reset();
+#undef X
 }
+
+void delay_10us() {
+    static unsigned char i;
+#define X (10 * 12 - 3) / 5
+    for (i = X; i > X; i--)
+        ;
+#undef X
+}
+
 void delay_ms(unsigned long ms) {
-    unsigned long x;
-    for (x = 0; x < ms; x++)
-        delay_us(1000);
+    static unsigned int i, j, k;
+    for (i = ms; i > 0; i--)
+        for (j = 2; j > 0; j--)
+            for (k = 248; k > 0; k--)
+                ;
 }
 
-void timer_reset() {
-    TL0 = (char)TIMER_INIT;
-    TH0 = (char)(TIMER_INIT >> 8);
+void delay_10ms() {
+    unsigned char i, j, k;
+    for (i = 5; i > 0; i--)
+        for (j = 4; j > 0; j--)
+            for (k = 248; k > 0; k--)
+                ;
 }
 
-void timer0() interrupt 1 using 2 {
-    timer_reset();
-    if (time_lock) {
-        time_us++;
-    }
+void delay_200ms() {
+    unsigned char i, j, k;
+    for (i = 5; i > 0; i--)
+        for (j = 132; j > 0; j--)
+            for (k = 150; k > 0; k--)
+                ;
+}
+
+void delay_500ms() {
+    unsigned char i, j, k;
+    for (i = 15; i > 0; i--)
+        for (j = 202; j > 0; j--)
+            for (k = 81; k > 0; k--)
+                ;
+}
+
+void delay_1s() {
+    unsigned char h, i, j, k;
+    for (h = 5; h > 0; h--)
+        for (i = 4; i > 0; i--)
+            for (j = 116; j > 0; j--)
+                for (k = 214; k > 0; k--)
+                    ;
 }
