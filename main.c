@@ -1,8 +1,11 @@
+#include "buzz_io.h"
 #include "pwm.h"
 #include "timer.h"
-#include "buzz_io.h"
 
-bit stop_check() { return 1; }
+bit stop_check() {
+    if (P3_7 != 0) // K4 pressed
+        return 0;
+}
 
 int main(void) {
 
@@ -11,7 +14,7 @@ int main(void) {
 begin:
     for (i = 0; i < 50; i++) {
         delay_ms(1);
-        if (P3_7 != 0) // K4 not pressed
+        if (P3_4 != 0) // K1 not pressed
             goto begin;
     }
 
