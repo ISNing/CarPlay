@@ -4,7 +4,9 @@ CarPlay
 *.lnp
 *.M51
 *.uvgui.*
+*.uvopt
 *.LST
 *.OBJ
 *.log
 *.lock
+*.__i
