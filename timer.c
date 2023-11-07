@@ -25,8 +25,8 @@ void delay_ms(unsigned long ms) {
 }
 
 void timer_reset() {
-    TL0 = (char)Times;
-    TH0 = (char)(Times >> 8);
+    TL0 = (char)TIMER_INIT;
+    TH0 = (char)(TIMER_INIT >> 8);
 }
 
 void timer0() interrupt 1 using 2 {
