@@ -10,9 +10,18 @@ bit motor2_go = 0;
 signed int pwm_count_motor1 = 0;
 signed int pwm_count_motor2 = 0;
 
-void set_pwm_motor1(int val) { pwm_motor1 = val; }
+int pwm_restricted(int val) {
+    if (val > MAX_MOTOR_PWM)
+        return MAX_MOTOR_PWM;
+    else if (val < -MAX_MOTOR_PWM)
+        return -MAX_MOTOR_PWM;
+    else
+        return val;
+}
 
-void set_pwm_motor2(int val) { pwm_motor2 = val; }
+void set_pwm_motor1(int val) { pwm_motor1 = pwm_restricted(val); }
+
+void set_pwm_motor2(int val) { pwm_motor2 = pwm_restricted(val); }
 
 int get_pwm_motor1() { return pwm_motor1; }
 
