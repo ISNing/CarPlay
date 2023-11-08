@@ -2,7 +2,7 @@
 #include "led_sensor.h"
 #include "pid.h"
 #include "pwm.h"
-#include "timer.h"
+#include "delay.h"
 
 bit k2_pressed = 0;
 bit k3_pressed = 0;

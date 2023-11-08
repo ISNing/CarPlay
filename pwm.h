@@ -2,7 +2,7 @@
 #define _PWM_H_
 #include <math.h>
 #include "motor_io.h"
-#include "timer.h"
+#include "delay.h"
 
 #define MOTOR_PWM_FREQ 2500
 #define MAX_MOTOR_PWM 40
