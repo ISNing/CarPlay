@@ -71,14 +71,14 @@ void PwmMotor2Refresh(void) {
 
 void PwmRefreshBlocked(bit (*stop_check_ptr)()) {
     motor1_go = 1;
-    motor1_go = 1;
+    motor2_go = 1;
     while (1) {
         PwmMotor1Refresh();
         PwmMotor2Refresh();
-        delay_hns(1e7 / MOTOR_PWM_FREQ / MAX_MOTOR_PWM);
+        delay_10us();// equal to delay_us(1e6 / MOTOR_PWM_FREQ / MAX_MOTOR_PWM);
         if (stop_check_ptr())
             break;
     }
     motor1_go = 0;
-    motor1_go = 0;
+    motor2_go = 0;
 }
