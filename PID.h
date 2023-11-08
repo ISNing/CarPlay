@@ -1,15 +1,17 @@
 #ifndef _PID_H_
 #define _PID_H_
-#include "pwm.h"
 
 struct PID {
-    float kp;
-    float ki;
-    float kd;
+    float kp, ki, kd;
 };
 typedef struct PID _PID;
 
-int PositionPID(float deviation, _PID pid);
-int PositionPIDToSpd(float deviation, _PID pid);
+struct HistoryError {
+    float integral_bias, last_bias;
+};
+typedef struct HistoryError _HistoryError;
+
+signed char PWMMotorL(signed char TraceData/*, float TarSpeed*/);
+signed char PWMMotorR(signed char TraceData/*, float TarSpeed*/);
 
 #endif
