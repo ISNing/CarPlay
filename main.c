@@ -1,29 +1,42 @@
 #include "buzz_io.h"
+#include "delay.h"
 #include "led_sensor.h"
 #include "pid.h"
 #include "pwm.h"
-#include "delay.h"
 
+bit bias_ignored = 0;
 bit k2_pressed = 0;
 bit k3_pressed = 0;
+bit last_left_led = 0;
+bit last_right_led = 0;
 
 bit stop_check() {
     signed char turn_bias = 0;
-    if (Left_1_led == 0)
+    static int pwml = 0, pwmr = 0;
+    if (Left_1_led == 0) {
+        last_left_led = 0;
         turn_bias++;
-    if (Right_1_led == 0)
+    } else last_left_led = 1;
+    if (Right_1_led == 0) {
+        last_right_led = 0;
         turn_bias--;
-    
-    // set_pwm_motor1(PWMMotorL(turn_bias));
-    // set_pwm_motor2(PWMMotorR(turn_bias)); TODO:This is not working
+    } else last_right_led = 1;
+
+    CalcTurnPwm(turn_bias);
+    pwml = PWMMotorL();//bias_ignored ? 0 : 
+    pwmr = PWMMotorR();
+
+    set_pwm_motor1(pwml);
+    set_pwm_motor2(pwmr);
     if (P3_5 == 0) { // K2 pressed
         BuzzOn;
         k2_pressed = 1;
     } else {
         if (k2_pressed) {
             BuzzOff;
-            set_pwm_motor1(get_pwm_motor1() + 1);
-            set_pwm_motor2(get_pwm_motor2() + 1);
+            bias_ignored = 1;
+            // set_pwm_motor1(get_pwm_motor1() + 1);
+            // set_pwm_motor2(get_pwm_motor2() + 1);
         }
         k2_pressed = 0;
     }
@@ -33,8 +46,9 @@ bit stop_check() {
     } else {
         if (k3_pressed) {
             BuzzOff;
-            set_pwm_motor1(get_pwm_motor1() - 1);
-            set_pwm_motor2(get_pwm_motor2() - 1);
+            bias_ignored = 0;
+            // set_pwm_motor1(get_pwm_motor1() - 1);
+            // set_pwm_motor2(get_pwm_motor2() - 1);
         }
         k3_pressed = 0;
     }
